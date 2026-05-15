@@ -1,0 +1,7 @@
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
+  include Knitsearch::Migration
+
+  def up
+    create_searchable_table <%= source_table_name.inspect %>, columns: <%= columns.inspect %>, tokenizer: <%= options[:tokenizer].to_sym.inspect %>
+  end
+end

@@ -1,0 +1,19 @@
+{
+  "name": "knitsearch",
+  "runArgs": [
+    "--name",
+    "knitsearch"
+  ],
+  "image": "ghcr.io/rails/devcontainer/images/ruby:4.0.3",
+  "workspaceFolder": "/workspaces/knitsearch",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/knitsearch,type=bind,consistency=cached",
+  "postCreateCommand": "bin/devcontainer",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp",
+        "anthropic.claude-code"
+      ]
+    }
+  }
+}
