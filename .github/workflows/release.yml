@@ -25,7 +25,7 @@ jobs:
         uses: rubygems/release-gem@v1
       - name: Set release tag
         id: tag
-        run: echo "tag=v$(ruby -e "require './lib/knitsearch/version'; puts Knitsearch::VERSION")" >> $GITHUB_OUTPUT
+        run: echo "tag=v$(ruby -e "require './lib/arca/version'; puts Arca::VERSION")" >> $GITHUB_OUTPUT
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
