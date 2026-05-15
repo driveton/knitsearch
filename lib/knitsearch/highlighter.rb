@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "cgi"
+require "cgi/escape"
 
 module Knitsearch
   # HTML highlighter for search results. Replaces placeholder marks inserted by

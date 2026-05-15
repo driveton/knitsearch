@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "cgi"
+require "cgi/escape"
 
 module Knitsearch
   # The user-facing concern. Include in an ActiveRecord model and call

@@ -76,7 +76,6 @@ class Knitsearch::AssociatedAgainstHasManyThroughTest < Minitest::Test
     tag = Tag.create!(name: "vip")
 
     card.tags << tag
-    initial_updated_at = card.updated_at
     assert_equal "vip", card.reload.tags_name_plain_text
 
     # Even though we can't truly test non-indexed columns without modifying the database,

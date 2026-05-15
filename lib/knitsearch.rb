@@ -41,8 +41,6 @@ module Knitsearch
   class ConfigurationError < Error; end
 
   class << self
-    attr_reader :belongs_to_dependents, :has_many_dependents, :has_many_through_dependents, :has_many_through_target_dependents
-
     def belongs_to_dependents
       @belongs_to_dependents ||= Hash.new { |h, k| h[k] = [] }
     end

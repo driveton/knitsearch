@@ -79,8 +79,8 @@ class Knitsearch::AssociatedAgainstBelongsToTest < Minitest::Test
       against: { name: "A" },
       associated_against: { agenda: { name: "A" } }
     )
-    card1 = Card.create!(name: "John", agenda: agenda)
-    card2 = Card.create!(name: "Investment Bank", agenda: Agenda.create!(name: "General"))
+    Card.create!(name: "John", agenda: agenda)
+    Card.create!(name: "Investment Bank", agenda: Agenda.create!(name: "General"))
 
     # Both match "investment" but card2 should rank higher because it matches in name field (weight A)
     # while card1 matches in agenda.name (also weight A). Actually both have same weight, so just verify both match
@@ -92,7 +92,7 @@ class Knitsearch::AssociatedAgainstBelongsToTest < Minitest::Test
     agenda = Agenda.create!(name: "Priority Clients")
     Card.searchable_by against: { name: "A" }, associated_against: { agenda: [:name] }
 
-    card = Card.create!(name: "Alice", agenda: agenda)
+    Card.create!(name: "Alice", agenda: agenda)
     results = Card.search("priority").to_a
     assert_equal 1, results.count
   end
@@ -116,7 +116,7 @@ class Knitsearch::AssociatedAgainstBelongsToTest < Minitest::Test
   def test_parent_destroy_with_dependent_destroy_cleans_children
     agenda = Agenda.create!(name: "To Delete")
     Card.searchable_by against: { name: "A" }, associated_against: { agenda: [:name] }
-    card = Card.create!(name: "Child Card", agenda: agenda)
+    Card.create!(name: "Child Card", agenda: agenda)
 
     assert_equal 1, Card.count
     agenda.destroy

@@ -114,7 +114,7 @@ class Knitsearch::MultisearchTest < Minitest::Test
 
     # Verify that callbacks fire by creating a record and checking if it syncs
     reset_multisearch!
-    card = Card.create!(name: "Callback Test", agenda_id: nil)
+    Card.create!(name: "Callback Test", agenda_id: nil)
 
     # If the callback worked, the record should be indexed
     results = Knitsearch.multisearch("Callback").to_a
@@ -125,8 +125,8 @@ class Knitsearch::MultisearchTest < Minitest::Test
   def test_backfill_populates_documents_for_existing_records
     # Create cards WITHOUT multisearchable first
     reset_multisearchable_state!(Card)
-    card1 = Card.create!(name: "Backfill Test 1", agenda_id: nil)
-    card2 = Card.create!(name: "Backfill Test 2", agenda_id: nil)
+    Card.create!(name: "Backfill Test 1", agenda_id: nil)
+    Card.create!(name: "Backfill Test 2", agenda_id: nil)
 
     # Now declare multisearchable and backfill
     Card.multisearchable against: [:name]
@@ -159,7 +159,7 @@ class Knitsearch::MultisearchTest < Minitest::Test
   def test_multisearch_with_fts_operator_words_does_not_crash
     Card.multisearchable against: [:name]
 
-    card = Card.create!(name: "Test AND OR NOT content", agenda_id: nil)
+    Card.create!(name: "Test AND OR NOT content", agenda_id: nil)
 
     result = Knitsearch.multisearch("AND OR NOT")
     assert result.is_a?(ActiveRecord::Relation)
@@ -168,7 +168,7 @@ class Knitsearch::MultisearchTest < Minitest::Test
   def test_multisearch_with_very_long_query_does_not_crash
     Card.multisearchable against: [:name]
 
-    card = Card.create!(name: "Test", agenda_id: nil)
+    Card.create!(name: "Test", agenda_id: nil)
 
     long_query = "a" * 5000
     result = Knitsearch.multisearch(long_query)
@@ -182,7 +182,7 @@ class Knitsearch::MultisearchTest < Minitest::Test
     # Create a card inside a transaction and roll back
     # after_commit callbacks should NOT fire, so document should not exist
     Card.transaction do
-      card = Card.create!(name: "Rollback Test", agenda_id: nil)
+      Card.create!(name: "Rollback Test", agenda_id: nil)
       # Inside transaction, before commit, callback hasn't fired yet
       assert_equal 0, Knitsearch.multisearch("Rollback").count, "Callback shouldn't fire until commit"
       raise ActiveRecord::Rollback

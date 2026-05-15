@@ -50,7 +50,7 @@ class Knitsearch::AssociatedAgainstHasManyTest < Minitest::Test
     Agenda.searchable_by against: { name: "A" }, associated_against: { cards: [:name] }
     agenda = Agenda.create!(name: "Agenda")
     card1 = Card.create!(name: "Alice", agenda: agenda)
-    card2 = Card.create!(name: "Bob", agenda: agenda)
+    Card.create!(name: "Bob", agenda: agenda)
 
     assert_equal "Alice Bob", agenda.reload.cards_name_plain_text
 
